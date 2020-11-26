@@ -1,12 +1,8 @@
 # @name info
-GET https://api.cf.eu10.hana.ondemand.com/v2/info
+GET {{endpoint}}/v2/info
 
 ###
 @authHost = {{info.response.body.authorization_endpoint}}
-
-GET https://api.cf.eu10.hana.ondemand.com/v3
-
-###
 
 # @name login
 POST {{authHost}}/oauth/token
@@ -19,5 +15,12 @@ client_id=cf&username={{username}}&password={{password}}&grant_type=password
 @token = {{login.response.body.access_token}}
 
 
-GET https://api.cf.eu10.hana.ondemand.com/v3/organizations
+# @name organiations
+GET {{endpoint}}/v3/organizations
+Authorization: Bearer {{token}}
+
+###
+@organization = {{organiations.response.body.resources[0].guid}}
+
+GET {{endpoint}}/v2/organizations/{{organization}}/users?results-per-page=1
 Authorization: Bearer {{token}}

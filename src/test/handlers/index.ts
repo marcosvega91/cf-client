@@ -200,6 +200,51 @@ const handlers = [
       }),
     )
   }),
+
+  rest.get(
+    'https://api.cf.eu10.hana.ondemand.com/v2/organizations/:organization/users',
+    (req, res, ctx) => {
+      const page = parseInt(req.url.searchParams.get('page') ?? '1', 10)
+      const { organization } = req.params
+      const user = {
+        metadata: {
+          guid: 'test',
+          url: '/v2/users/test',
+          created_at: '2017-05-12T09:24:41Z',
+          updated_at: '2019-06-06T07:56:04Z',
+        },
+        entity: {
+          admin: false,
+          active: false,
+          default_space_guid: null,
+          username: 'user.test',
+          spaces_url: '/v2/users/test/spaces',
+          organizations_url: '/v2/users/test/organizations',
+          managed_organizations_url: '/v2/users/test/managed_organizations',
+          billing_managed_organizations_url: '/v2/users/test/billing_managed_organizations',
+          audited_organizations_url: '/v2/users/test/audited_organizations',
+          managed_spaces_url: '/v2/users/test/managed_spaces',
+          audited_spaces_url: '/v2/users/test/audited_spaces',
+        },
+      }
+      return res(
+        ctx.status(200),
+        ctx.json({
+          total_results: 2,
+          total_pages: 2,
+          prev_url:
+            page === 1
+              ? null
+              : `/v2/organizations/${organization}/users?order-direction=asc&page=1&results-per-page=1`,
+          next_url:
+            page === 2
+              ? null
+              : `/v2/organizations/${organization}/users?order-direction=asc&page=2&results-per-page=1`,
+          resources: [user],
+        }),
+      )
+    },
+  ),
 ]
 
 export { handlers }

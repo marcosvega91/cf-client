@@ -2,7 +2,7 @@ type Link = {
   href: string
 }
 
-type Paginated<T> = {
+type PaginatedV3<T> = {
   pagination: {
     total_results: number
     total_pages: number
@@ -13,4 +13,12 @@ type Paginated<T> = {
   resources: T[]
 }
 
-export { Paginated }
+type PaginatedV2<T> = {
+  total_results: number
+  total_pages: number
+  prev_url: null | string
+  next_url: null | string
+  resources: T[]
+}
+
+export { PaginatedV3, PaginatedV2 }

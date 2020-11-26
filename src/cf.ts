@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import { URLSearchParams } from 'url'
-import { Info, Login, Links, APIKeys } from './internalTypes'
+import { Info, Login, APIKeys } from './internalTypes'
 import { organizations } from './apis'
 
 const cf = (endpoint: string) => {
@@ -8,9 +8,6 @@ const cf = (endpoint: string) => {
     login: async (username: string, password: string) => {
       const infoResponse = await fetch(`${endpoint}/v2/info`)
       const info = (await infoResponse.json()) as Info
-
-      const endpointsResponse = await fetch(`${endpoint}/v3`)
-      const endpoints = (await endpointsResponse.json()) as Links
 
       const loginResponse = await fetch(`${info.authorization_endpoint}/oauth/token`, {
         method: 'POST',
@@ -31,7 +28,7 @@ const cf = (endpoint: string) => {
       const login = (await loginResponse.json()) as Login
 
       return {
-        [APIKeys.organizations]: organizations(login, endpoints.links.organizations.href),
+        [APIKeys.organizations]: organizations(login, endpoint),
       }
     },
   }

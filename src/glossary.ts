@@ -1,2 +1,2 @@
 export * from './apis/types'
-export { Organization } from './apis/organizations'
+export { Organization, OrganizationUser } from './apis/organizations'
