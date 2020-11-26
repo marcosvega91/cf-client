@@ -1,0 +1,12 @@
+{
+  "rootDir": "src",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "strict": true,
+    "outDir": "dist"
+  }
+}

@@ -1,0 +1,23 @@
+# @name info
+GET https://api.cf.eu10.hana.ondemand.com/v2/info
+
+###
+@authHost = {{info.response.body.authorization_endpoint}}
+
+GET https://api.cf.eu10.hana.ondemand.com/v3
+
+###
+
+# @name login
+POST {{authHost}}/oauth/token
+Authorization: Basic Y2Y6
+Content-Type: application/x-www-form-urlencoded
+
+client_id=cf&username={{username}}&password={{password}}&grant_type=password
+
+### 
+@token = {{login.response.body.access_token}}
+
+
+GET https://api.cf.eu10.hana.ondemand.com/v3/organizations
+Authorization: Bearer {{token}}
