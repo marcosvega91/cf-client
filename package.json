@@ -1,6 +1,6 @@
 {
   "name": "cf-client",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Cloud Foundry wrapper for nodejs written in typescript",
   "main": "dist/index.js",
   "scripts": {
@@ -43,6 +43,11 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   },
   "repository": {
     "type": "git",
