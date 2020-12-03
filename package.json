@@ -3,11 +3,13 @@
   "version": "0.0.0-semantically-released",
   "description": "Cloud Foundry wrapper for nodejs written in typescript",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "lint": "eslint --fix .",
-    "build": "rollup -c",
+    "build": "rollup -c && npm run generateDeclarations",
+    "generateDeclarations": "tsc --declaration true --emitDeclarationOnly --noEmit false",
     "semantic-release": "semantic-release"
   },
   "keywords": [
