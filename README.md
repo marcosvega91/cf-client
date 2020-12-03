@@ -1,4 +1,4 @@
-# @cf-http-client
+# cf-http-client
 
 I have made this project to make it possible to interact with Cloud Foundry platform using their APIs.
 
@@ -17,19 +17,19 @@ For now I have implemented only a few APIs. The ones that I need
 With npm
 
 ```bash
-npm install --save @cf-http-client
+npm install --save cf-http-client
 ```
 
 With yarn
 
 ```bash
-yarn install @cf-http-client
+yarn install cf-http-client
 ```
 
 ## Usage
 
 ```ts
-import { cf } from '@cf-http-client'
+import { cf } from 'cf-http-client'
 
 const client = await cf('YOUR_ENDPOINT').login('USERNAME', 'PASSWORD')
 
