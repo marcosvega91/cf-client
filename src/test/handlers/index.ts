@@ -201,6 +201,66 @@ const handlers = [
     )
   }),
 
+  rest.get('https://api.cf.eu10.hana.ondemand.com/v3/spaces', (req, res, ctx) => {
+    const page = parseInt(req.url.searchParams.get('page') ?? '1', 10)
+    const space = {
+      guid: 'guid',
+      created_at: '2019-10-08T08:40:16Z',
+      updated_at: '2020-02-18T12:37:56Z',
+      name: 'space',
+      relationships: {
+        quota: {
+          data: {
+            guid: 'quota-guid',
+          },
+        },
+        organization: {
+          data: {
+            guid: 'organization',
+          },
+        },
+      },
+      metadata: {
+        labels: {},
+        annotations: {},
+      },
+      links: {
+        self: {
+          href: 'https://api.cf.eu10.hana.ondemand.com/v3/organizations/guid',
+        },
+        domains: {
+          href: 'https://api.cf.eu10.hana.ondemand.com/v3/organizations/guid/domains',
+        },
+        default_domain: {
+          href: 'https://api.cf.eu10.hana.ondemand.com/v3/organizations/guid/domains/default',
+        },
+        quota: {
+          href: 'https://api.cf.eu10.hana.ondemand.com/v3/organization_quotas/guid-guid',
+        },
+      },
+    }
+    return res(
+      ctx.status(200),
+      ctx.json({
+        pagination: {
+          total_results: 2,
+          total_pages: 2,
+          first: {
+            href: `https://api.cf.eu10.hana.ondemand.com/v3/spaces?page=1&per_page=1`,
+          },
+          last: {
+            href: `https://api.cf.eu10.hana.ondemand.com/v3/spaces?page=2&per_page=1`,
+          },
+          next:
+            page === 2 ? null : `https://api.cf.eu10.hana.ondemand.com/v3/spaces?page=2&per_page=1`,
+          previous:
+            page === 1 ? null : `https://api.cf.eu10.hana.ondemand.com/v3/spaces?page=1&per_page=1`,
+        },
+        resources: [space],
+      }),
+    )
+  }),
+
   rest.get(
     'https://api.cf.eu10.hana.ondemand.com/v2/organizations/:organization/users',
     (req, res, ctx) => {

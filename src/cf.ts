@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 import { URLSearchParams } from 'url'
 import { Info, Login, APIKeys } from './internalTypes'
-import { organizations } from './apis'
+import { organizations, spaces } from './apis'
 
 const cf = (endpoint: string) => {
   return {
@@ -29,6 +29,7 @@ const cf = (endpoint: string) => {
 
       return {
         [APIKeys.organizations]: organizations(login, endpoint),
+        [APIKeys.spaces]: spaces(login, endpoint),
       }
     },
   }
