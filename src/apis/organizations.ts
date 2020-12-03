@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 import { URLSearchParams } from 'url'
 import { Login } from '../internalTypes'
-import { PaginatedV3, PaginatedV2 } from './types'
+import { PaginatedV3, PaginatedV2, APIError } from './types'
 
 type Organization = {
   guid: string
@@ -42,14 +42,18 @@ function organizations(auth: Login, endpoint: string) {
         },
       })
 
-      const list = (await listResponse.json()) as PaginatedV3<Organization>
+      if (listResponse.ok && listResponse.status === 200) {
+        const list = (await listResponse.json()) as PaginatedV3<Organization>
 
-      return list
+        return list
+      }
+      const error = (await listResponse.json()) as APIError
+      return error
     },
     users: {
       all: async (organization: string, qs?: any) => {
         const params = new URLSearchParams(qs)
-        const auditorsResponse = await fetch(
+        const usersResponse = await fetch(
           `${endpoint}/v2/organizations/${organization}/users?${params}`,
           {
             headers: {
@@ -57,9 +61,13 @@ function organizations(auth: Login, endpoint: string) {
             },
           },
         )
-        const list = (await auditorsResponse.json()) as PaginatedV2<OrganizationUser>
+        if (usersResponse.ok && usersResponse.status === 200) {
+          const list = (await usersResponse.json()) as PaginatedV2<OrganizationUser>
 
-        return list
+          return list
+        }
+        const error = (await usersResponse.json()) as APIError
+        return error
       },
     },
   }

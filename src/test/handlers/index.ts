@@ -206,6 +206,16 @@ const handlers = [
     (req, res, ctx) => {
       const page = parseInt(req.url.searchParams.get('page') ?? '1', 10)
       const { organization } = req.params
+      if (organization !== 'real_organization') {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            description: `organization doesn't exist`,
+            error_code: 'not_exist',
+            code: 9000,
+          }),
+        )
+      }
       const user = {
         metadata: {
           guid: 'test',

@@ -45,29 +45,3 @@ test('should pass query paramiters to the API', async () => {
     },
   })
 })
-
-test('should get the list of users for a specific organization', async () => {
-  const cfclient = await setup()
-  const users = await cfclient.organizations.users.all('123')
-
-  expect(users).toMatchObject({
-    total_results: 2,
-    total_pages: 2,
-    prev_url: null,
-    next_url: '/v2/organizations/123/users?order-direction=asc&page=2&results-per-page=1',
-  })
-})
-
-test('should get the list of users for a specific organization and page', async () => {
-  const cfclient = await setup()
-  const users = await cfclient.organizations.users.all('123', {
-    page: 2,
-  })
-
-  expect(users).toMatchObject({
-    total_results: 2,
-    total_pages: 2,
-    prev_url: '/v2/organizations/123/users?order-direction=asc&page=1&results-per-page=1',
-    next_url: null,
-  })
-})

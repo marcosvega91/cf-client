@@ -8,7 +8,8 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "lint": "eslint --fix .",
-    "build": "rollup -c && npm run generateDeclarations",
+    "clean": "rm -fr dist",
+    "build": "npm run clean && rollup -c && npm run generateDeclarations",
     "generateDeclarations": "tsc --declaration true --emitDeclarationOnly --noEmit false",
     "semantic-release": "semantic-release"
   },

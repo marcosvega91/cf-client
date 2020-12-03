@@ -21,4 +21,10 @@ type PaginatedV2<T> = {
   resources: T[]
 }
 
-export { PaginatedV3, PaginatedV2 }
+type APIError = {
+  description: string
+  error_code: string
+  code: number
+}
+
+export { PaginatedV3, PaginatedV2, APIError }
