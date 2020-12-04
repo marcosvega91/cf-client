@@ -3,14 +3,13 @@
   "version": "0.0.0-semantically-released",
   "description": "Cloud Foundry wrapper for nodejs written in typescript",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "lint": "eslint --fix .",
     "clean": "rm -fr dist",
-    "build": "npm run clean && rollup -c && npm run generateDeclarations",
-    "generateDeclarations": "tsc --declaration true --emitDeclarationOnly --noEmit false",
+    "build": "npm run clean && rollup -c",
     "semantic-release": "semantic-release"
   },
   "keywords": [
@@ -19,7 +18,6 @@
   "author": "Marco Moretti",
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^3.1.1",
     "@types/jest": "^26.0.15",
     "@types/node-fetch": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
@@ -36,6 +34,7 @@
     "msw": "^0.22.3",
     "prettier": "^2.2.0",
     "rollup": "^2.33.3",
+    "rollup-plugin-typescript2": "^0.29.0",
     "semantic-release": "^17.3.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"

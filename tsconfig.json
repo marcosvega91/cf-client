@@ -1,12 +1,13 @@
 {
   "rootDir": "src",
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/internalTypes.ts", "src/__tests__/**/*.ts", "src/test/**/*.ts"],
   "compilerOptions": {
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noEmit": true,
+    "declaration": true,
     "strict": true,
-    "outDir": "dist"
+    "declarationDir": "dist/types"
   }
 }
