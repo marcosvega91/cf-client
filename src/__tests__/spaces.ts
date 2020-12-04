@@ -45,3 +45,31 @@ test('should pass query paramiters to the API', async () => {
     },
   })
 })
+
+test('should get list of spaces for an organization', async () => {
+  const cfclient = await setup()
+  const list = await cfclient.organizations.spaces('real_organization')
+
+  expect(list).toMatchObject({
+    total_results: 2,
+    total_pages: 2,
+    prev_url: null,
+    next_url:
+      '/v2/organizations/real_organization/spaces?order-direction=asc&page=2&results-per-page=1',
+  })
+})
+
+test('should filter spaces for an organization', async () => {
+  const cfclient = await setup()
+  const list = await cfclient.organizations.spaces('real_organization', {
+    page: 2,
+  })
+
+  expect(list).toMatchObject({
+    total_results: 2,
+    total_pages: 2,
+    prev_url:
+      '/v2/organizations/real_organization/spaces?order-direction=asc&page=1&results-per-page=1',
+    next_url: null,
+  })
+})

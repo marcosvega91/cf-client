@@ -315,6 +315,66 @@ const handlers = [
       )
     },
   ),
+  rest.get(
+    'https://api.cf.eu10.hana.ondemand.com/v2/organizations/:organization/spaces',
+    (req, res, ctx) => {
+      const page = parseInt(req.url.searchParams.get('page') ?? '1', 10)
+      const { organization } = req.params
+      if (organization !== 'real_organization') {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            description: `organization doesn't exist`,
+            error_code: 'not_exist',
+            code: 9000,
+          }),
+        )
+      }
+      const space = {
+        metadata: {
+          guid: 'test',
+          url: '/v2/spaces/test',
+          created_at: '2017-05-12T09:24:41Z',
+          updated_at: '2019-06-06T07:56:04Z',
+        },
+        entity: {
+          name: 'test',
+          organization_guid: 'real_organization',
+          space_quota_definition_guid: null,
+          isolation_segment_guid: null,
+          allow_ssh: true,
+          organization_url: '/v2/organizations/real_organization',
+          developers_url: '/v2/spaces/test/developers',
+          managers_url: '/v2/spaces/test/managers',
+          auditors_url: '/v2/spaces/test/auditors',
+          apps_url: '/v2/spaces/test/apps',
+          routes_url: '/v2/spaces/test/routes',
+          domains_url: '/v2/spaces/test/domains',
+          service_instances_url: '/v2/spaces/test/service_instances',
+          app_events_url: '/v2/spaces/test/app_events',
+          events_url: '/v2/spaces/test/events',
+          security_groups_url: '/v2/spaces/test/security_groups',
+          staging_security_groups_url: '/v2/spaces/test/staging_security_groups',
+        },
+      }
+      return res(
+        ctx.status(200),
+        ctx.json({
+          total_results: 2,
+          total_pages: 2,
+          prev_url:
+            page === 1
+              ? null
+              : `/v2/organizations/${organization}/spaces?order-direction=asc&page=1&results-per-page=1`,
+          next_url:
+            page === 2
+              ? null
+              : `/v2/organizations/${organization}/spaces?order-direction=asc&page=2&results-per-page=1`,
+          resources: [space],
+        }),
+      )
+    },
+  ),
 ]
 
 export { handlers }
