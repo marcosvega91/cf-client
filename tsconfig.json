@@ -1,7 +1,8 @@
 {
+  "compileOnSave": true,
   "rootDir": "src",
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "src/internalTypes.ts", "src/__tests__/**/*.ts", "src/test/**/*.ts"],
+  "exclude": ["node_modules", "src/internalTypes.ts", "src/__tests__/**/*.ts", "src/tests/**/*.ts"],
   "compilerOptions": {
     "moduleResolution": "node",
     "esModuleInterop": true,

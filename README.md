@@ -11,6 +11,7 @@ For now I have implemented only a few APIs. The ones that I need
 1. Get the list of all organizations
 2. Get the list of users for an organization
 3. Get the list of all spaces
+4. Add a manager to an organization
 
 ## Installation
 

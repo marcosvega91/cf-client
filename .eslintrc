@@ -1,19 +1,20 @@
 {
   "plugins": ["prettier", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
+  "ignorePatterns": "*.js",
   "extends": [
     "airbnb-typescript/base",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "./src/tests/tsconfig.json", "./src/__tests__/tsconfig.json"]
   },
   "rules": {
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["src/__tests__/**/*.ts", "src/test/**/*.ts"] }
+      { "devDependencies": ["src/__tests__/**/*.ts", "src/tests/**/*.ts"] }
     ]
   }
 }

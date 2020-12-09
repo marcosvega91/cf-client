@@ -1,8 +1,4 @@
-import { cf } from '..'
-
-function setup() {
-  return cf('https://api.cf.eu10.hana.ondemand.com').login('username', 'password')
-}
+import { setup } from '../tests/setup'
 
 test('should get the list of users for a specific organization', async () => {
   const cfclient = await setup()

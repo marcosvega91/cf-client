@@ -10,5 +10,5 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/'],
   setupFilesAfterEnv: fs.existsSync('src/setupTests.ts') ? ['<rootDir>/src/setupTests.ts'] : [],
   moduleDirectories: ['node_modules', path.join(__dirname, './src')],
-  collectCoverageFrom: ['src/**/*.ts', '!<rootDir>/src/test/**/*'],
+  collectCoverageFrom: ['src/**/*.ts', '!<rootDir>/src/tests/**/*'],
 }

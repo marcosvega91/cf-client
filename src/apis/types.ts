@@ -13,6 +13,13 @@ type PaginatedV3<T> = {
   resources: T[]
 }
 
+type MetadataV2 = {
+  guid: string
+  url: string
+  created_at: string
+  updated_at: string
+}
+
 type PaginatedV2<T> = {
   total_results: number
   total_pages: number
@@ -27,4 +34,9 @@ type APIError = {
   code: number
 }
 
-export { PaginatedV3, PaginatedV2, APIError }
+type EntityV2<T> = {
+  metadata: MetadataV2
+  entity: T
+}
+
+export { PaginatedV3, PaginatedV2, APIError, MetadataV2, EntityV2 }

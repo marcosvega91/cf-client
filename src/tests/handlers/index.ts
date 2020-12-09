@@ -375,6 +375,66 @@ const handlers = [
       )
     },
   ),
+  rest.put<{
+    username: string
+  }>(
+    'https://api.cf.eu10.hana.ondemand.com/v2/organizations/:organization/managers',
+    (req, res, ctx) => {
+      const { organization } = req.params
+
+      const { username } = req.body
+      if (organization !== 'real_organization') {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            description: `organization doesn't exist`,
+            error_code: 'not_exist',
+            code: 9000,
+          }),
+        )
+      }
+
+      if (username !== 'real_user') {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            description: `The user could not be found: ${username}`,
+            error_code: 'CF-UserNotFound',
+            code: 20003,
+          }),
+        )
+      }
+
+      return res(
+        ctx.status(201),
+        ctx.json({
+          metadata: {
+            guid: 'real_organization',
+            url: '/v2/organizations/real_organization',
+            created_at: '2016-06-08T16:41:34Z',
+            updated_at: '2016-06-08T16:41:26Z',
+          },
+          entity: {
+            name: 'real_user',
+            billing_enabled: false,
+            quota_definition_guid: '1234',
+            status: 'active',
+            quota_definition_url: '/v2/quota_definitions/1234',
+            spaces_url: '/v2/organizations/real_organization/spaces',
+            domains_url: '/v2/organizations/real_organization/domains',
+            private_domains_url: '/v2/organizations/real_organization/private_domains',
+            users_url: '/v2/organizations/real_organization/users',
+            managers_url: '/v2/organizations/real_organization/managers',
+            billing_managers_url: '/v2/organizations/real_organization/billing_managers',
+            auditors_url: '/v2/organizations/real_organization/auditors',
+            app_events_url: '/v2/organizations/real_organization/app_events',
+            space_quota_definitions_url:
+              '/v2/organizations/real_organization/space_quota_definitions',
+          },
+        }),
+      )
+    },
+  ),
 ]
 
 export { handlers }
